@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<title>Complejos Regionales</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link href=
+"https://unpkg.com/maplibre-gl@3.6.1/dist/maplibre-gl.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/src/btn.css">
+<link rel="stylesheet" href="assets/css/src/style.css">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+</head>
+<style>
+    .open {
+        max-height: 300px; /* espacio suficiente */
+    }
+    [data-menu] {
+        position: relative !important;
+        display: block !important;
+        }
+</style>
+<body>
+    <!-- DIV DEL MAPA -->
+    <div id="map" style="z-index: 0;"></div>
+
+<!-- M E N U -->
+<div id="menu-flotante"
+    class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50
+           p-4 bg-white rounded-xl shadow-lg w-80
+           transition-all duration-300 transform scale-95 opacity-0 overflow-y-auto max-h-[70vh]">
+
+    <!-- Encabezado -->
+    <div class="flex justify-between items-center mb-2 w-full px-2">
+        <h2 id="nombre-municipio" class="text-lg font-semibold text-gray-800 text-center"></h2>
+        <button id="cerrar-menu" class="text-gray-500 hover:text-red-500 font-bold text-lg ">✕</button>
+    </div>
+
+    <!-- UNIVERSIDAD -->
+    <div class="border-b">
+        <button data-btn="uni"
+            class="w-full flex items-center gap-4 p-3 hover:bg-gray-100">
+            <img class="w-10 h-10 rounded-full" src="assets/images/imgs/recursos/icons menu/uni-1.jpg">
+            <span class="text-lg font-semibold">Universidad</span>
+        </button>
+
+        <div data-menu="uni"
+            class="overflow-hidden max-h-0 transition-all duration-300 ease-out">
+            <div class="lista-instituciones"></div>
+        </div>
+    </div>
+
+    <!-- PREPARATORIA -->
+    <div class="border-b">
+        <button data-btn="prepa"
+            class="w-full flex items-center gap-4 p-3 hover:bg-gray-100">
+            <img class="w-10 h-10 rounded-full" src="assets/images/imgs/recursos/icons menu/prepa-1.jpg">
+            <span class="text-lg font-semibold">Preparatoria</span>
+        </button>
+
+        <div data-menu="prepa"
+            class="submenu max-h-0 overflow-hidden transition-all duration-300">
+            <div class="lista-instituciones"></div>
+        </div>
+    </div>
+
+    <!-- CAMPUS -->
+    <div>
+        <button data-btn="campus"
+            class="w-full flex items-center gap-4 p-3 hover:bg-gray-100">
+            <img class="w-10 h-10" src="assets/images/imgs/recursos/icons menu/como llegar.jpg">
+            <span class="text-lg font-semibold">Campus</span>
+        </button>
+
+        <div data-menu="campus"
+            class="submenu max-h-0 overflow-hidden transition-all duration-300">
+            <div class="lista-instituciones"></div>
+        </div>
+    </div>
+</div>
+
+<div class="PF">
+    Departamento de Planta Física / SA
+</div>
+<div class="pagina">
+    plantafisica.buap.mx
+</div>
+ 
+<img id="zoomInGIF" src="assets/images/imgs/recursos/zoomN.gif" alt="">
+    
+<script src="assets/js/leaflet.js"></script>
+<script src="https://unpkg.com/maplibre-gl@3.6.1/dist/maplibre-gl.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+<script src="assets/js/src/L.LabelTextCollision.js"></script>
+<script src="assets/js/src/gif.js"></script>
+<script src="assets/js/src/mapa2.js"></script>
+<script src="assets/js/src/functions/datos.js"></script>
+<script src="assets/js/src/markers.js"></script>
+
+</body>
+
+</html>
