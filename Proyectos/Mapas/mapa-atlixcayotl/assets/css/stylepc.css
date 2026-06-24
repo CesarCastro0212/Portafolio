@@ -1,0 +1,111 @@
+@media screen and (min-width: 992px) {
+    #control-overlay {
+        top: 22%;
+        width: 281px;
+      }
+    .menu_icon{
+        position: absolute;
+        left: 85%;
+        top: 84%;
+    }
+    .menu_icon:hover{
+        box-shadow: 1px 1px 8px #050505, 2px 2px 6px white;
+        border-top-left-radius: 30%;
+        border-top-right-radius: 30%;
+    }
+    .control-layers-button:hover{
+        box-shadow: 1px 1px 8px #050505, 2px 2px 6px white;
+        border-radius: 0px 23px 23px 0px;
+    }
+    .subMenuGreen:hover{
+        box-shadow: 1px 1px 8px #050505, 2px 2px 6px white;
+        border-radius: 0px 23px 23px 0px;
+    }
+    .subMenuPink:hover{
+        box-shadow: 1px 1px 8px #050505, 2px 2px 6px white;
+        border-radius: 0px 23px 23px 0px;
+    }
+    .subMenuYellow:hover{
+        box-shadow: 1px 1px 8px #050505, 2px 2px 6px white;
+        border-radius: 0px 23px 23px 0px;
+    }
+    .subMenuOrange:hover{
+        box-shadow: 1px 1px 8px #050505, 2px 2px 6px white;
+        border-radius: 0px 23px 23px 0px;
+    }
+    .subMenuGrey:hover{
+        box-shadow: 1px 1px 8px #050505, 2px 2px 6px white;
+        border-radius: 0px 23px 23px 0px;
+    }
+    
+    .button-modal:hover{
+        box-shadow: 1px 1px 8px #050505, 2px 2px 6px black;
+    }
+    .btnBICIChico:hover{
+        box-shadow: 1px 1px 8px #050505, 2px 2px 6px black;
+    }
+    .btnBUSChico:hover{
+        box-shadow: 1px 1px 8px #050505, 2px 2px 6px black;
+    }
+    .btnBICINormal:hover{
+        box-shadow: 1px 1px 8px #050505, 2px 2px 6px black;
+    }
+    .btnBUSNormal:hover{
+        box-shadow: 1px 1px 8px #050505, 2px 2px 6px black;
+    }
+    .btnBICIGrande:hover{
+        box-shadow: 1px 1px 8px #050505, 2px 2px 6px black;
+    }
+    .btnBUSGrande:hover{
+        box-shadow: 1px 1px 8px #050505, 2px 2px 6px black;
+    }
+    .modal-header{
+        width: 90%;
+        left: 56px;
+    }
+    .modal-header-acces{
+        width: 55%;
+        left: 21%;
+    }
+    .modal-content{
+        margin: 16px auto;
+    }
+    
+    .modal-Level-img {
+    
+    top: 0px;
+    
+}
+    .div-container{
+        width: 50%;
+        left: 60px;
+        top: 10px;
+    }
+    .b1{
+        left: 200px;
+        display: inline-block;
+    }
+    .btn{
+        width: 37%;
+        position: absolute;
+        top: 76px;
+        left: 55%;
+    }
+    .modal-header-acces{
+        width: 55%;
+        left: 21%;
+    }
+#zoomInGIF {
+  display: flex; 
+  position: absolute;
+  width: 30%;
+  z-index: 1002;
+
+  left: 30%;
+  top: 20%;
+}
+
+  }
+
+  /************************ END CONTROL OVERLAY ************************/
+
