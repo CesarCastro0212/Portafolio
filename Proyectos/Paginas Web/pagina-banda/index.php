@@ -1,0 +1,11 @@
+<?php include __DIR__ . '/components/header.php'; ?>
+<?php include __DIR__ . '/components/navbar.php'; ?>
+<?php include __DIR__ . '/components/hero.php'; ?>
+<?php include __DIR__ . '/components/about.php'; ?>
+<?php include __DIR__ . '/components/releases.php'; ?>
+<?php include __DIR__ . '/components/tour.php'; ?>
+<?php include __DIR__ . '/components/members.php'; ?>
+<?php include __DIR__ . '/components/modals.php'; ?>
+<?php include __DIR__ . '/components/gallery.php'; ?>
+<?php include __DIR__ . '/components/footer.php'; ?>
+<?php include __DIR__ . '/components/scripts.php'; ?>

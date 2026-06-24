@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE NEONS | Indie Rock Official</title>
+    <!-- Google Fonts: Anton for headers (Rock vibe), Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkBase: '#1a1a1a',      // Very dark gray, not pure black
+                        accentOrange: '#f97316',  // Vivid Orange
+                        softPurple: '#3730a3',    // Soft dark purple
+                        blueGray: '#334155',      // Blue-gray secondary
+                    },
+                    fontFamily: {
+                        rock: ['Anton', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'photo-flash': 'photo-flash 6s infinite',
+                        'spin-slow': 'spin 8s linear infinite',
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                    },
+                    keyframes: {
+                        'photo-flash': {
+                            '0%, 100%': { transform: 'scale(1)', filter: 'brightness(1)' },
+                            '10%': { filter: 'brightness(1.5) contrast(1.2)' },
+                            '12%': { filter: 'brightness(2) grayscale(0.2)' },
+                            '15%': { filter: 'brightness(1) contrast(1)' },
+                            '50%': { transform: 'scale(1.05)', filter: 'brightness(0.9)' },
+                            '60%': { filter: 'brightness(1.8)' },
+                            '62%': { filter: 'brightness(1)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #f97316;
+            border-radius: 5px;
+        }
+
+        /* Glassmorphism for Navbar & Modals */
+        .glass {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Custom Hover Effects */
+        .btn-orange {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .btn-orange::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: all 0.4s ease;
+        }
+        .btn-orange:hover::before {
+            left: 100%;
+        }
+
+        /* Image parallax and flash layer */
+        .hero-overlay {
+            background: linear-gradient(to bottom, rgba(26,26,26,0.3) 0%, rgba(26,26,26,1) 100%);
+        }
+        
+        /* Modals */
+        .modal {
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease-in-out;
+        }
+        .modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-content {
+            transform: scale(0.95);
+            transition: all 0.3s ease-in-out;
+        }
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        /* Spotty Player Progress */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 12px;
+            width: 12px;
+            border-radius: 50%;
+            background: #f97316;
+            cursor: pointer;
+            margin-top: -4px;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #4b5563;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-accentOrange selection:text-white">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0">
+                    <a href="#home" class="font-rock text-3xl tracking-widest text-white hover:text-accentOrange transition-colors">THE NEONS</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-6 font-semibold text-sm uppercase tracking-wide cursor-pointer">
+                        <a href="#home" class="hover:text-accentOrange transition-colors">Home</a>
+                        <a href="#releases" class="hover:text-accentOrange transition-colors">Últimos Lanzamientos</a>
+                        <a href="#discography" class="hover:text-accentOrange transition-colors">Discografía</a>
+                        <a href="#tour" class="hover:text-accentOrange transition-colors">Fechas de Tour</a>
+                        <a href="#about" class="hover:text-accentOrange transition-colors">Acerca de</a>
+                        <a href="#store" class="hover:text-accentOrange transition-colors">Tienda</a>
+                        <a href="#patreon" class="hover:text-accentOrange transition-colors text-accentOrange"><i class="fab fa-patreon mr-1"></i>Patreon</a>
+                        <a href="#contact" class="hover:text-accentOrange transition-colors">Contacto</a>
+                    </div>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="hidden md:hidden bg-darkBase/95 border-b border-gray-800" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-center uppercase font-bold text-sm">
+                <a href="#home" class="block px-3 py-2 rounded-md hover:bg-gray-800 hover:text-accentOrange">Home</a>
+                <a href="#releases" class="block px-3 py-2 rounded-md hover:bg-gray-800 hover:text-accentOrange">Últimos Lanzamientos</a>
+                <a href="#tour" class="block px-3 py-2 rounded-md hover:bg-gray-800 hover:text-accentOrange">Fechas de Tour</a>
+                <a href="#members" class="block px-3 py-2 rounded-md hover:bg-gray-800 hover:text-accentOrange">Acerca de</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md hover:bg-gray-800 hover:text-accentOrange">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- Background Image with Animation -->
+        <div class="absolute inset-0 w-full h-full z-0">
+            <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=1920&fm=jpg&crop=entropy" alt="Band Playing" class="w-full h-full object-cover animate-photo-flash">
+            <div class="absolute inset-0 hero-overlay"></div>
+            <!-- Grain overlay to add grit -->
+            <div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
+        </div>
+        
+        <!-- Hero Content -->
+        <div class="relative z-10 text-center px-4 pt-20 max-w-5xl mx-auto">
+            <h1 class="font-rock text-6xl md:text-8xl lg:text-[10rem] text-transparent bg-clip-text bg-gradient-to-br from-white via-gray-200 to-gray-500 tracking-wider mb-2 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] animate-fade-in-up">
+                THE NEONS
+            </h1>
+            <p class="text-xl md:text-3xl font-light text-gray-300 tracking-widest mt-4 uppercase animate-fade-in-up" style="animation-delay: 0.2s;">
+                Energía pura. Sonido Indomable.
+            </p>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce cursor-pointer z-10" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">
+            <i class="fas fa-chevron-down text-3xl text-accentOrange"></i>
+        </div>
+    </section>
+
+    <!-- About Brief / Catchy Phrase -->
+    <section id="about" class="py-24 bg-darkBase relative">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="font-rock text-4xl md:text-5xl mb-8 text-accentOrange tracking-wide uppercase">"Nacimos en el ruido, vivimos en el escenario."</h2>
+            <p class="text-lg md:text-xl text-gray-400 leading-relaxed font-light">
+                Somos The Neons, un cuarteto que fusiona la melancolía del indie con la fuerza visceral del rock alternativo. Cada acorde es un pulso, cada letra es un grito en la multitud. Para los que buscan sentirlo todo, están en el lugar correcto.
+            </p>
+            <div class="mt-10 w-24 h-1 bg-accentOrange mx-auto"></div>
+        </div>
+    </section>
+
+    <!-- Music Player (Últimos Lanzamientos) -->
+    <section id="releases" class="py-24 bg-gradient-to-b from-darkBase to-blueGray relative overflow-hidden">
+        <!-- Decorational blur dots -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-accentOrange opacity-10 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-softPurple opacity-20 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-5xl mx-auto px-6 relative z-10">
+            <h2 class="font-rock text-4xl md:text-5xl text-center mb-16 tracking-wide">Últimos <span class="text-accentOrange">Lanzamientos</span></h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <!-- Spotify type container -->
+                <div class="bg-black/40 backdrop-blur-xl border border-gray-800 rounded-3xl p-6 shadow-2xl">
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="text-xs font-bold tracking-widest text-gray-400 uppercase">Reproduciendo ahora</span>
+                        <i class="fab fa-spotify text-green-500 text-2xl"></i>
+                    </div>
+                    
+                    <div class="flex items-center gap-6 mb-8">
+                        <div class="w-32 h-32 md:w-40 md:h-40 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(249,115,22,0.3)] flex-shrink-0">
+                            <img src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=500&fm=jpg" alt="Album Cover" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-1">Midnight Rebellion</h3>
+                            <p class="text-gray-400 mb-3">The Neons</p>
+                            <span class="px-3 py-1 bg-gray-800 text-xs rounded-full border border-gray-700">Nuevo Sencillo</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Player Controls -->
+                    <div class="space-y-4">
+                        <input type="range" value="30" class="w-full">
+                        <div class="flex justify-between text-xs text-gray-500 font-mono">
+                            <span>1:24</span>
+                            <span>3:45</span>
+                        </div>
+                        <div class="flex justify-center items-center gap-8">
+                            <button class="text-gray-400 hover:text-white transition"><i class="fas fa-random"></i></button>
+                            <button class="text-gray-400 hover:text-white transition text-xl"><i class="fas fa-step-backward"></i></button>
+                            <button class="w-14 h-14 rounded-full bg-accentOrange text-white hover:scale-110 transition-transform shadow-[0_0_15px_rgba(249,115,22,0.5)] flex items-center justify-center text-xl">
+                                <i class="fas fa-play ml-1"></i>
+                            </button>
+                            <button class="text-gray-400 hover:text-white transition text-xl"><i class="fas fa-step-forward"></i></button>
+                            <button class="text-gray-400 hover:text-white transition"><i class="fas fa-redo"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Platform Buttons -->
+                <div class="flex flex-col gap-5">
+                    <p class="text-xl text-gray-300 font-light mb-4">Escucha nuestra música en tu plataforma favorita.</p>
+                    <a href="#" class="flex items-center gap-4 bg-[#1DB954]/10 hover:bg-[#1DB954]/20 border border-[#1DB954]/50 group transition duration-300 rounded-xl p-4">
+                        <i class="fab fa-spotify text-3xl text-[#1DB954] group-hover:scale-110 transition"></i>
+                        <div class="text-left flex-grow">
+                            <span class="block text-sm text-gray-400">Escuchar en</span>
+                            <span class="block font-bold text-lg">Spotify</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-500 group-hover:text-white transition"></i>
+                    </a>
+                    <a href="#" class="flex items-center gap-4 bg-white/5 hover:bg-white/10 border border-white/20 group transition duration-300 rounded-xl p-4">
+                        <i class="fab fa-apple text-3xl text-white group-hover:scale-110 transition"></i>
+                        <div class="text-left flex-grow">
+                            <span class="block text-sm text-gray-400">Escuchar en</span>
+                            <span class="block font-bold text-lg">Apple Music</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-500 group-hover:text-white transition"></i>
+                    </a>
+                    <a href="#" class="flex items-center gap-4 bg-[#FF0000]/10 hover:bg-[#FF0000]/20 border border-[#FF0000]/50 group transition duration-300 rounded-xl p-4">
+                        <i class="fab fa-youtube text-3xl text-[#FF0000] group-hover:scale-110 transition"></i>
+                        <div class="text-left flex-grow">
+                            <span class="block text-sm text-gray-400">Ver en</span>
+                            <span class="block font-bold text-lg">YouTube</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-500 group-hover:text-white transition"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tour Dates -->
+    <section id="tour" class="py-24 bg-darkBase">
+        <div class="max-w-5xl mx-auto px-6">
+            <h2 class="font-rock text-4xl md:text-5xl text-center mb-16 tracking-wide">Próximas <span class="text-accentOrange">Fechas</span></h2>
+            
+            <div class="space-y-4">
+                <!-- Tour Item -->
+                <div class="group bg-gray-900/50 hover:bg-gray-800 border border-gray-800 hover:border-accentOrange/50 p-6 flex flex-col md:flex-row items-center justify-between rounded-xl transition duration-300">
+                    <div class="flex flex-col md:flex-row items-center gap-6 md:gap-12 w-full md:w-auto text-center md:text-left">
+                        <div class="font-rock text-3xl text-accentOrange w-24">15 SEP</div>
+                        <div>
+                            <h3 class="text-2xl font-bold">Arena Ciudad de México</h3>
+                            <p class="text-gray-400">Ciudad de México, MX</p>
+                        </div>
+                    </div>
+                    <button class="btn-orange mt-6 md:mt-0 px-8 py-3 bg-accentOrange text-white font-bold rounded-lg uppercase tracking-wider text-sm shadow-[0_0_15px_rgba(249,115,22,0.4)]">Comprar Boletos</button>
+                </div>
+                <!-- Tour Item -->
+                <div class="group bg-gray-900/50 hover:bg-gray-800 border border-gray-800 hover:border-accentOrange/50 p-6 flex flex-col md:flex-row items-center justify-between rounded-xl transition duration-300">
+                    <div class="flex flex-col md:flex-row items-center gap-6 md:gap-12 w-full md:w-auto text-center md:text-left">
+                        <div class="font-rock text-3xl text-accentOrange w-24">22 SEP</div>
+                        <div>
+                            <h3 class="text-2xl font-bold">Teatro Diana</h3>
+                            <p class="text-gray-400">Guadalajara, MX</p>
+                        </div>
+                    </div>
+                    <button class="btn-orange mt-6 md:mt-0 px-8 py-3 bg-accentOrange text-white font-bold rounded-lg uppercase tracking-wider text-sm shadow-[0_0_15px_rgba(249,115,22,0.4)]">Comprar Boletos</button>
+                </div>
+                <!-- Tour Item -->
+                <div class="group bg-gray-900/50 hover:bg-gray-800 border border-gray-800 hover:border-accentOrange/50 p-6 flex flex-col md:flex-row items-center justify-between rounded-xl transition duration-300">
+                    <div class="flex flex-col md:flex-row items-center gap-6 md:gap-12 w-full md:w-auto text-center md:text-left">
+                        <div class="font-rock text-3xl text-white opacity-50 w-24">05 OCT</div>
+                        <div>
+                            <h3 class="text-2xl font-bold line-through text-gray-500">Foro Sol - Festival Indie</h3>
+                            <p class="text-gray-600">Monterrey, MX</p>
+                        </div>
+                    </div>
+                    <button class="mt-6 md:mt-0 px-8 py-3 bg-gray-800 text-gray-400 font-bold rounded-lg uppercase tracking-wider text-sm cursor-not-allowed">Sold Out</button>
+                </div>
+                <!-- Tour Item -->
+                <div class="group bg-gray-900/50 hover:bg-gray-800 border border-gray-800 hover:border-accentOrange/50 p-6 flex flex-col md:flex-row items-center justify-between rounded-xl transition duration-300">
+                    <div class="flex flex-col md:flex-row items-center gap-6 md:gap-12 w-full md:w-auto text-center md:text-left">
+                        <div class="font-rock text-3xl text-accentOrange w-24">12 OCT</div>
+                        <div>
+                            <h3 class="text-2xl font-bold">The Roxy</h3>
+                            <p class="text-gray-400">Los Angeles, CA, USA</p>
+                        </div>
+                    </div>
+                    <button class="btn-orange mt-6 md:mt-0 px-8 py-3 bg-accentOrange text-white font-bold rounded-lg uppercase tracking-wider text-sm shadow-[0_0_15px_rgba(249,115,22,0.4)]">Comprar Boletos</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Band Members -->
+    <section id="members" class="py-24 bg-gradient-to-t from-darkBase to-blueGray/20 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="font-rock text-4xl md:text-5xl text-center mb-16 tracking-wide">La <span class="text-accentOrange">Banda</span></h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Member 1 -->
+                <div class="group cursor-pointer" onclick="openModal('member1')">
+                    <div class="relative overflow-hidden rounded-xl aspect-[3/4] mb-4">
+                        <img src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=600&fm=jpg" alt="Vocalista" class="w-full h-full object-cover group-hover:scale-110 transition duration-500 group-hover:brightness-110 grayscale group-hover:grayscale-0">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkBase via-transparent to-transparent opacity-80 group-hover:opacity-60 transition duration-300"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <h3 class="font-rock text-3xl text-white">LIAM</h3>
+                            <p class="text-accentOrange font-semibold text-sm tracking-widest uppercase">Voz Principal / Guitarra</p>
+                        </div>
+                        <div class="absolute top-4 right-4 w-10 h-10 bg-accentOrange rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition duration-300">
+                            <i class="fas fa-plus text-white"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member 2 -->
+                <div class="group cursor-pointer" onclick="openModal('member2')">
+                    <div class="relative overflow-hidden rounded-xl aspect-[3/4] mb-4">
+                        <img src="https://images.unsplash.com/photo-1525362081669-2b476bb628c3?q=80&w=600&fm=jpg" alt="Baterista" class="w-full h-full object-cover group-hover:scale-110 transition duration-500 group-hover:brightness-110 grayscale group-hover:grayscale-0">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkBase via-transparent to-transparent opacity-80 group-hover:opacity-60 transition duration-300"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <h3 class="font-rock text-3xl text-white">NOAH</h3>
+                            <p class="text-accentOrange font-semibold text-sm tracking-widest uppercase">Batería</p>
+                        </div>
+                        <div class="absolute top-4 right-4 w-10 h-10 bg-accentOrange rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition duration-300">
+                            <i class="fas fa-plus text-white"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member 3 -->
+                <div class="group cursor-pointer" onclick="openModal('member3')">
+                    <div class="relative overflow-hidden rounded-xl aspect-[3/4] mb-4">
+                        <img src="https://images.unsplash.com/photo-1534351590666-13e3e96b5017?q=80&w=600&fm=jpg" alt="Guitarrista" class="w-full h-full object-cover group-hover:scale-110 transition duration-500 group-hover:brightness-110 grayscale group-hover:grayscale-0">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkBase via-transparent to-transparent opacity-80 group-hover:opacity-60 transition duration-300"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <h3 class="font-rock text-3xl text-white">ELIAS</h3>
+                            <p class="text-accentOrange font-semibold text-sm tracking-widest uppercase">Guitarra Líder</p>
+                        </div>
+                        <div class="absolute top-4 right-4 w-10 h-10 bg-accentOrange rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition duration-300">
+                            <i class="fas fa-plus text-white"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member 4 -->
+                <div class="group cursor-pointer" onclick="openModal('member4')">
+                    <div class="relative overflow-hidden rounded-xl aspect-[3/4] mb-4">
+                        <img src="https://images.unsplash.com/photo-1493225457124-a1a2a5f5f9af?q=80&w=600&fm=jpg" alt="Bajista" class="w-full h-full object-cover group-hover:scale-110 transition duration-500 group-hover:brightness-110 grayscale group-hover:grayscale-0">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkBase via-transparent to-transparent opacity-80 group-hover:opacity-60 transition duration-300"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <h3 class="font-rock text-3xl text-white">SARA</h3>
+                            <p class="text-accentOrange font-semibold text-sm tracking-widest uppercase">Bajo / Coros</p>
+                        </div>
+                        <div class="absolute top-4 right-4 w-10 h-10 bg-accentOrange rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition duration-300">
+                            <i class="fas fa-plus text-white"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modals for Members -->
+    <div id="modal-container" class="fixed inset-0 z-[100] flex items-center justify-center modal bg-black/80 backdrop-blur-sm" onclick="closeModal(event)">
+        <!-- Content injected by JS -->
+        <div id="modal-content-box" class="modal-content bg-gray-900 border border-gray-800 rounded-2xl max-w-2xl w-full mx-4 overflow-hidden shadow-2xl relative" onclick="event.stopPropagation()">
+            <button class="absolute top-4 right-4 text-gray-400 hover:text-accentOrange z-10 text-2xl" onclick="closeModal(event, true)">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/2 aspect-square md:aspect-auto h-64 md:h-auto">
+                    <img id="modal-img" src="" class="w-full h-full object-cover grayscale">
+                </div>
+                <div class="p-8 md:w-1/2 flex flex-col justify-center">
+                    <h3 id="modal-name" class="font-rock text-4xl mb-1 text-white">Name</h3>
+                    <p id="modal-role" class="text-accentOrange font-bold tracking-widest uppercase text-xs mb-6">Role</p>
+                    <p id="modal-desc" class="text-gray-300 font-light leading-relaxed text-sm">Description here</p>
+                    <div class="mt-8 flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-accentOrange transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-accentOrange transition"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Photo Gallery -->
+    <section id="gallery" class="py-24 bg-darkBase">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="font-rock text-4xl md:text-5xl text-center mb-16 tracking-wide">Recuerdos en <span class="text-accentOrange">Gira</span></h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="col-span-2 row-span-2 relative group overflow-hidden rounded-xl">
+                    <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?q=80&w=800&fm=jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 min-h-[300px]">
+                    <div class="absolute inset-0 bg-accentOrange/0 group-hover:bg-accentOrange/20 transition duration-500"></div>
+                </div>
+                <div class="relative group overflow-hidden rounded-xl">
+                    <img src="https://images.unsplash.com/photo-1470229722913-7c090be5c5a5?q=80&w=600&fm=jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 aspect-square">
+                    <div class="absolute inset-0 bg-softPurple/0 group-hover:bg-softPurple/30 transition duration-500"></div>
+                </div>
+                <div class="relative group overflow-hidden rounded-xl">
+                    <img src="https://images.unsplash.com/photo-1540039155732-d68b54f58f3c?q=80&w=600&fm=jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 aspect-square">
+                    <div class="absolute inset-0 bg-accentOrange/0 group-hover:bg-accentOrange/20 transition duration-500"></div>
+                </div>
+                <div class="col-span-2 relative group overflow-hidden rounded-xl">
+                    <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=800&fm=jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 h-full max-h-[250px]">
+                    <div class="absolute inset-0 bg-blueGray/0 group-hover:bg-blueGray/40 transition duration-500 flex items-center justify-center">
+                        <i class="fas fa-play text-4xl text-white opacity-0 group-hover:opacity-100 transition-opacity transform scale-50 group-hover:scale-100 duration-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Footer -->
+    <section id="contact" class="py-24 bg-gradient-to-b from-darkBase to-black relative">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="bg-gray-900 border border-gray-800 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
+                <!-- Decorative bg -->
+                <div class="absolute -right-20 -top-20 w-64 h-64 bg-accentOrange opacity-20 rounded-full blur-[80px]"></div>
+                
+                <h2 class="font-rock text-4xl mb-2 relative z-10">Contacto / <span class="text-accentOrange">Booking</span></h2>
+                <p class="text-gray-400 mb-8 font-light relative z-10">¿Quieres que The Neons toque en tu ciudad? Escríbenos.</p>
+                
+                <form class="space-y-6 relative z-10">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Nombre</label>
+                            <input type="text" class="w-full bg-gray-800 border-b-2 border-transparent focus:border-accentOrange outline-none px-4 py-3 rounded-t-lg transition text-white" placeholder="Tu nombre">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Email</label>
+                            <input type="email" class="w-full bg-gray-800 border-b-2 border-transparent focus:border-accentOrange outline-none px-4 py-3 rounded-t-lg transition text-white" placeholder="tu@correo.com">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Mensaje</label>
+                        <textarea rows="4" class="w-full bg-gray-800 border-b-2 border-transparent focus:border-accentOrange outline-none px-4 py-3 rounded-t-lg transition text-white resize-none" placeholder="Escribe tu mensaje aquí..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-orange w-full py-4 bg-accentOrange text-white font-bold rounded-lg uppercase tracking-widest hover:shadow-[0_0_20px_rgba(249,115,22,0.6)]">Enviar Mensaje <i class="fas fa-paper-plane ml-2"></i></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black py-12 border-t border-gray-900">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between">
+            <h2 class="font-rock text-3xl tracking-widest text-white mb-6 md:mb-0">THE NEONS</h2>
+            <div class="flex space-x-6 text-gray-400">
+                <a href="#" class="hover:text-accentOrange transition text-2xl"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-accentOrange transition text-2xl"><i class="fab fa-tiktok"></i></a>
+                <a href="#" class="hover:text-accentOrange transition text-2xl"><i class="fab fa-spotify"></i></a>
+                <a href="#" class="hover:text-accentOrange transition text-2xl"><i class="fab fa-youtube"></i></a>
+                <a href="#patreon" class="hover:text-accentOrange transition text-2xl"><i class="fab fa-patreon"></i></a>
+            </div>
+        </div>
+        <div class="text-center text-gray-600 text-xs mt-8 uppercase tracking-widest font-mono">
+            &copy; 2026 THE NEONS OFFICIAL. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- JavaScript for interactivity -->
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-lg', 'bg-darkBase/95');
+                nav.classList.remove('bg-transparent');
+            } else {
+                nav.classList.remove('shadow-lg', 'bg-darkBase/95');
+                nav.classList.add('bg-transparent');
+            }
+        });
+
+        // Member Data for Modals
+        const members = {
+            member1: {
+                name: "LIAM", role: "Voz Principal / Guitarra", img: "https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=600&fm=jpg",
+                desc: "Fundador de The Neons. Liam escribe las letras desde sus experiencias más oscuras, transformándolas en himnos energéticos que conectan con miles de jóvenes."
+            },
+            member2: {
+                name: "NOAH", role: "Batería", img: "https://images.unsplash.com/photo-1525362081669-2b476bb628c3?q=80&w=600&fm=jpg",
+                desc: "El motor de la banda. Con influencias de punk y rock clásico, su estilo en vivo es descrito como un tren sin frenos. Pura agresividad y precisión."
+            },
+            member3: {
+                name: "ELIAS", role: "Guitarra Líder", img: "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?q=80&w=600&fm=jpg",
+                desc: "El cerebro detrás de los riffs memorables de The Neons. Maestro de los pedales de efectos, creando atmósferas envolventes en cada pista."
+            },
+            member4: {
+                name: "SARA", role: "Bajo / Coros", img: "https://images.unsplash.com/photo-1493225457124-a1a2a5f5f9af?q=80&w=600&fm=jpg",
+                desc: "La base sólida que amarra todo el sonido. Su presencia en el escenario es imponente. Aporta las armonías vocales que le dan el toque nostálgico a la banda."
+            }
+        };
+
+        const modal = document.getElementById('modal-container');
+        const mImg = document.getElementById('modal-img');
+        const mName = document.getElementById('modal-name');
+        const mRole = document.getElementById('modal-role');
+        const mDesc = document.getElementById('modal-desc');
+
+        function openModal(id) {
+            const data = members[id];
+            mImg.src = data.img;
+            mName.innerText = data.name;
+            mRole.innerText = data.role;
+            mDesc.innerText = data.desc;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // prevent scrolling
+        }
+
+        function closeModal(e, force = false) {
+            if (force || e.target.id === 'modal-container') {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+    </script>
+</body>
+</html>
