@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Frío Listo - Cadena de alimentos fríos listos para calentar. Banderillas, papas fritas, hamburguesas, helados y más. ¡Listo en minutos!">
+  <title>Frío Listo | Alimentos Listos Para Ti</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: { orange: '#F97316', yellow: '#FACC15', purple: '#7C3AED', dark: '#1A0A2E', card: '#2D1B4E' }
+          },
+          fontFamily: { outfit: ['Outfit','sans-serif'], poppins: ['Poppins','sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="font-outfit">
+
+<!-- NAVBAR -->
+<nav id="navbar" class="navbar px-4 py-3">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <a href="#inicio" class="nav-logo flex items-center gap-3">
+      <img src="assets/imgs/logo_friolisto.png" alt="Frío Listo Logo" class="h-12 rounded-lg">
+      <span class="text-xl font-bold gradient-text hidden sm:inline">Frío Listo</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#menu" class="nav-link text-white/80">Menú</a>
+      <a href="#nosotros" class="nav-link text-white/80">Quiénes Somos</a>
+      <a href="#ubicaciones" class="nav-link text-white/80">Ubicaciones</a>
+      <a href="#contacto" class="hero-cta !py-2 !px-6 !text-sm">Contáctanos</a>
+    </div>
+    <button id="hamburger" class="hamburger md:hidden flex flex-col gap-1.5 p-2" aria-label="Menú">
+      <span class="w-6 h-0.5 bg-white rounded"></span>
+      <span class="w-6 h-0.5 bg-white rounded"></span>
+      <span class="w-6 h-0.5 bg-white rounded"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div id="mobileMenu" class="mobile-menu fixed top-0 right-0 w-72 h-full bg-brand-dark/95 backdrop-blur-xl z-[999] flex flex-col pt-24 px-8 gap-6 border-l border-white/10">
+  <a href="#menu" class="text-lg text-white/80 hover:text-brand-orange transition">Menú</a>
+  <a href="#nosotros" class="text-lg text-white/80 hover:text-brand-orange transition">Quiénes Somos</a>
+  <a href="#ubicaciones" class="text-lg text-white/80 hover:text-brand-orange transition">Ubicaciones</a>
+  <a href="#contacto" class="hero-cta !text-sm text-center mt-4">Contáctanos</a>
+</div>
+
+<!-- HERO -->
+<section id="inicio" class="hero-section">
+  <img src="assets/imgs/hero_banderilla.png" alt="Banderilla con tocino Frío Listo" class="hero-bg">
+  <div class="particles" id="particles"></div>
+  <div class="orb orb-orange"></div>
+  <div class="orb orb-purple"></div>
+  <div class="hero-content max-w-7xl mx-auto px-4 py-32 md:py-0">
+    <div class="max-w-2xl">
+      <div class="badge-microwave mb-6">⚡ Listo en microondas en 2 minutos</div>
+      <h1 class="hero-title text-4xl sm:text-5xl lg:text-6xl mb-6">
+        El Sabor que <span class="gradient-text">No Espera</span>, y Tú Tampoco
+      </h1>
+      <p class="text-white/70 text-lg mb-8 leading-relaxed max-w-xl">
+        Descubre nuestra irresistible banderilla envuelta en tocino crujiente. Del congelador a tu mesa en minutos. <strong class="text-brand-yellow">Sin complicaciones, puro sabor.</strong>
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <a href="#menu" class="hero-cta">🔥 Ver Menú</a>
+        <a href="#nosotros" class="hero-cta-secondary">Conócenos →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="relative z-10 -mt-16 px-4">
+  <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div class="glass-card p-6 text-center fade-in-up">
+      <div class="text-3xl font-bold gradient-text counter" data-target="50" data-suffix="+">0</div>
+      <div class="text-white/60 text-sm mt-1">Productos</div>
+    </div>
+    <div class="glass-card p-6 text-center fade-in-up" style="transition-delay:.1s">
+      <div class="text-3xl font-bold gradient-text counter" data-target="15" data-suffix="+">0</div>
+      <div class="text-white/60 text-sm mt-1">Sucursales</div>
+    </div>
+    <div class="glass-card p-6 text-center fade-in-up" style="transition-delay:.2s">
+      <div class="text-3xl font-bold gradient-text counter" data-target="10000" data-suffix="+">0</div>
+      <div class="text-white/60 text-sm mt-1">Clientes felices</div>
+    </div>
+    <div class="glass-card p-6 text-center fade-in-up" style="transition-delay:.3s">
+      <div class="text-3xl font-bold gradient-text counter" data-target="5" data-suffix="★">0</div>
+      <div class="text-white/60 text-sm mt-1">Calificación</div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU / CAROUSEL -->
+<section id="menu" class="py-24 px-4">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16 fade-in-up">
+      <h2 class="section-title text-3xl sm:text-4xl gradient-text mb-4">Nuestro Menú</h2>
+      <div class="section-divider mb-4"></div>
+      <p class="text-white/60 max-w-xl mx-auto">Deliciosos productos congelados listos para preparar en minutos.</p>
+    </div>
+    <div class="carousel-container">
+      <div id="carouselTrack" class="carousel-track px-2">
+        <!-- Card 1 -->
+        <div class="carousel-card">
+          <div class="overflow-hidden"><img src="assets/imgs/banderilla_tocino.png" alt="Banderilla con Tocino"></div>
+          <div class="p-6">
+            <span class="text-xs font-semibold text-brand-orange bg-brand-orange/10 px-3 py-1 rounded-full">⭐ Favorito</span>
+            <h3 class="text-xl font-bold mt-3 mb-2">Banderilla con Tocino</h3>
+            <p class="text-white/60 text-sm">Crujiente tocino envolviendo una deliciosa banderilla. Lista en 2 min.</p>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="carousel-card">
+          <div class="overflow-hidden"><img src="assets/imgs/papas_fritas.png" alt="Papas Fritas"></div>
+          <div class="p-6">
+            <span class="text-xs font-semibold text-brand-yellow bg-brand-yellow/10 px-3 py-1 rounded-full">🍟 Clásico</span>
+            <h3 class="text-xl font-bold mt-3 mb-2">Papas Fritas</h3>
+            <p class="text-white/60 text-sm">Doradas y crujientes, el acompañamiento perfecto para cualquier comida.</p>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="carousel-card">
+          <div class="overflow-hidden"><img src="assets/imgs/hamburguesa.png" alt="Hamburguesa Gourmet"></div>
+          <div class="p-6">
+            <span class="text-xs font-semibold text-brand-purple bg-brand-purple/10 px-3 py-1 rounded-full">🍔 Premium</span>
+            <h3 class="text-xl font-bold mt-3 mb-2">Hamburguesa Gourmet</h3>
+            <p class="text-white/60 text-sm">Jugosa carne con queso derretido. Sabor de restaurante en tu casa.</p>
+          </div>
+        </div>
+        <!-- Card 4 -->
+        <div class="carousel-card">
+          <div class="overflow-hidden"><img src="assets/imgs/helado.png" alt="Helados"></div>
+          <div class="p-6">
+            <span class="text-xs font-semibold text-brand-orange bg-brand-orange/10 px-3 py-1 rounded-full">🍦 Postre</span>
+            <h3 class="text-xl font-bold mt-3 mb-2">Helados Artesanales</h3>
+            <p class="text-white/60 text-sm">Variedad de sabores cremosos para el postre perfecto.</p>
+          </div>
+        </div>
+        <!-- Card 5 -->
+        <div class="carousel-card">
+          <div class="overflow-hidden"><img src="assets/imgs/banderilla_tocino.png" alt="Hot Dog Premium"></div>
+          <div class="p-6">
+            <span class="text-xs font-semibold text-brand-yellow bg-brand-yellow/10 px-3 py-1 rounded-full">🌭 Nuevo</span>
+            <h3 class="text-xl font-bold mt-3 mb-2">Hot Dog Premium</h3>
+            <p class="text-white/60 text-sm">Salchicha premium con toppings irresistibles. ¡Calienta y disfruta!</p>
+          </div>
+        </div>
+        <!-- Card 6 -->
+        <div class="carousel-card">
+          <div class="overflow-hidden"><img src="assets/imgs/papas_fritas.png" alt="Nuggets de Pollo"></div>
+          <div class="p-6">
+            <span class="text-xs font-semibold text-brand-purple bg-brand-purple/10 px-3 py-1 rounded-full">🍗 Popular</span>
+            <h3 class="text-xl font-bold mt-3 mb-2">Nuggets de Pollo</h3>
+            <p class="text-white/60 text-sm">Trozos de pollo empanizados, crujientes por fuera y jugosos por dentro.</p>
+          </div>
+        </div>
+      </div>
+      <button id="carouselPrev" class="carousel-btn carousel-btn-prev" aria-label="Anterior">❮</button>
+      <button id="carouselNext" class="carousel-btn carousel-btn-next" aria-label="Siguiente">❯</button>
+      <div id="carouselDots" class="flex justify-center gap-3 mt-8"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTO PRINCIPAL -->
+<section class="py-24 px-4 relative overflow-hidden">
+  <div class="orb orb-yellow"></div>
+  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+    <div class="fade-in-left">
+      <img src="assets/imgs/banderilla_tocino.png" alt="Banderilla Frío Listo" class="rounded-3xl shadow-2xl shadow-brand-orange/20 w-full max-w-lg mx-auto hover:scale-[1.02] transition-transform duration-500">
+    </div>
+    <div class="fade-in-right">
+      <span class="text-brand-orange font-semibold text-sm tracking-widest uppercase">★ Producto Estrella</span>
+      <h2 class="section-title text-3xl sm:text-4xl mt-4 mb-6">Banderilla Envuelta<br><span class="gradient-text">en Tocino Crujiente</span></h2>
+      <p class="text-white/70 text-lg leading-relaxed mb-8">¿Antojo a medianoche? ¿Poco tiempo para cocinar? Nuestra banderilla con tocino es la solución. <strong class="text-white">Solo calienta en microondas 2 minutos</strong> y disfruta un sabor espectacular sin salir de casa.</p>
+      <div class="grid grid-cols-3 gap-4 mb-8">
+        <div class="glass-card p-4 text-center">
+          <div class="text-2xl mb-1">⏱️</div>
+          <div class="text-sm text-white/70">2 min prep</div>
+        </div>
+        <div class="glass-card p-4 text-center">
+          <div class="text-2xl mb-1">🎯</div>
+          <div class="text-sm text-white/70">Fácil acceso</div>
+        </div>
+        <div class="glass-card p-4 text-center">
+          <div class="text-2xl mb-1">🔥</div>
+          <div class="text-sm text-white/70">100% Sabor</div>
+        </div>
+      </div>
+      <a href="#ubicaciones" class="hero-cta">📍 Encuéntralo Cerca de Ti</a>
+    </div>
+  </div>
+</section>
+
+<!-- QUIÉNES SOMOS -->
+<section id="nosotros" class="py-24 px-4">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16 fade-in-up">
+      <h2 class="section-title text-3xl sm:text-4xl gradient-text mb-4">¿Quiénes Somos?</h2>
+      <div class="section-divider mb-4"></div>
+      <p class="text-white/60 max-w-2xl mx-auto">Somos una cadena mexicana de alimentos congelados de alta calidad, comprometidos con llevar sabor y practicidad a cada hogar.</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="glass-card p-8 text-center fade-in-up">
+        <div class="feature-icon bg-brand-orange/20 text-brand-orange mx-auto mb-4">🎯</div>
+        <h3 class="text-xl font-bold mb-3">Nuestra Misión</h3>
+        <p class="text-white/60 text-sm leading-relaxed">Ofrecer alimentos congelados de la más alta calidad que se preparan en minutos, brindando practicidad sin sacrificar el sabor.</p>
+      </div>
+      <div class="glass-card p-8 text-center fade-in-up" style="transition-delay:.15s">
+        <div class="feature-icon bg-brand-yellow/20 text-brand-yellow mx-auto mb-4">👁️</div>
+        <h3 class="text-xl font-bold mb-3">Nuestra Visión</h3>
+        <p class="text-white/60 text-sm leading-relaxed">Ser la marca líder en alimentos congelados de fácil preparación en toda Latinoamérica, reconocida por calidad e innovación.</p>
+      </div>
+      <div class="glass-card p-8 text-center fade-in-up" style="transition-delay:.3s">
+        <div class="feature-icon bg-brand-purple/20 text-brand-purple mx-auto mb-4">💎</div>
+        <h3 class="text-xl font-bold mb-3">Nuestros Valores</h3>
+        <p class="text-white/60 text-sm leading-relaxed">Calidad, innovación, compromiso con el cliente y responsabilidad social guían cada decisión que tomamos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UBICACIONES -->
+<section id="ubicaciones" class="py-24 px-4 relative">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16 fade-in-up">
+      <h2 class="section-title text-3xl sm:text-4xl gradient-text mb-4">Encuéntranos</h2>
+      <div class="section-divider mb-4"></div>
+      <p class="text-white/60 max-w-xl mx-auto">Visita cualquiera de nuestras sucursales y lleva el sabor Frío Listo a tu hogar.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="location-card fade-in-up">
+        <div class="text-3xl mb-3">📍</div>
+        <h3 class="text-xl font-bold mb-2">CDMX — Polanco</h3>
+        <p class="text-white/60 text-sm mb-4">Av. Presidente Masaryk #320, Col. Polanco, CP 11560</p>
+        <p class="text-brand-orange text-sm font-semibold">Lun-Dom: 8:00 - 21:00</p>
+      </div>
+      <div class="location-card fade-in-up" style="transition-delay:.1s">
+        <div class="text-3xl mb-3">📍</div>
+        <h3 class="text-xl font-bold mb-2">Monterrey — San Pedro</h3>
+        <p class="text-white/60 text-sm mb-4">Av. Vasconcelos #150, Col. Del Valle, CP 66220</p>
+        <p class="text-brand-orange text-sm font-semibold">Lun-Dom: 8:00 - 21:00</p>
+      </div>
+      <div class="location-card fade-in-up" style="transition-delay:.2s">
+        <div class="text-3xl mb-3">📍</div>
+        <h3 class="text-xl font-bold mb-2">Guadalajara — Zapopan</h3>
+        <p class="text-white/60 text-sm mb-4">Av. Patria #1200, Col. Jardines Universidad, CP 45110</p>
+        <p class="text-brand-orange text-sm font-semibold">Lun-Dom: 9:00 - 20:00</p>
+      </div>
+      <div class="location-card fade-in-up" style="transition-delay:.3s">
+        <div class="text-3xl mb-3">📍</div>
+        <h3 class="text-xl font-bold mb-2">Puebla — Angelópolis</h3>
+        <p class="text-white/60 text-sm mb-4">Blvd. del Niño Poblano #2510, Reserva Territorial, CP 72810</p>
+        <p class="text-brand-orange text-sm font-semibold">Lun-Sáb: 9:00 - 20:00</p>
+      </div>
+      <div class="location-card fade-in-up" style="transition-delay:.4s">
+        <div class="text-3xl mb-3">📍</div>
+        <h3 class="text-xl font-bold mb-2">Querétaro — Juriquilla</h3>
+        <p class="text-white/60 text-sm mb-4">Av. Juriquilla #800, Fracc. Juriquilla, CP 76226</p>
+        <p class="text-brand-orange text-sm font-semibold">Lun-Dom: 8:00 - 21:00</p>
+      </div>
+      <div class="location-card fade-in-up" style="transition-delay:.5s">
+        <div class="text-3xl mb-3">📍</div>
+        <h3 class="text-xl font-bold mb-2">Cancún — Zona Hotelera</h3>
+        <p class="text-white/60 text-sm mb-4">Blvd. Kukulcán Km 12.5, Zona Hotelera, CP 77500</p>
+        <p class="text-brand-orange text-sm font-semibold">Lun-Dom: 9:00 - 22:00</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO / FOOTER -->
+<footer id="contacto" class="footer pt-20 pb-8 px-4">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid md:grid-cols-4 gap-12 mb-16">
+      <!-- Brand -->
+      <div class="md:col-span-1">
+        <img src="assets/imgs/logo_friolisto.png" alt="Frío Listo" class="h-14 mb-4 rounded-lg">
+        <p class="text-white/50 text-sm leading-relaxed">Alimentos congelados de alta calidad, listos para preparar en minutos.</p>
+      </div>
+      <!-- Links -->
+      <div>
+        <h4 class="font-bold text-lg mb-4 text-brand-orange">Navegación</h4>
+        <ul class="space-y-3">
+          <li><a href="#inicio" class="footer-link text-white/50 text-sm">Inicio</a></li>
+          <li><a href="#menu" class="footer-link text-white/50 text-sm">Menú</a></li>
+          <li><a href="#nosotros" class="footer-link text-white/50 text-sm">Quiénes Somos</a></li>
+          <li><a href="#ubicaciones" class="footer-link text-white/50 text-sm">Ubicaciones</a></li>
+        </ul>
+      </div>
+      <!-- Contact -->
+      <div>
+        <h4 class="font-bold text-lg mb-4 text-brand-orange">Contacto</h4>
+        <ul class="space-y-3 text-white/50 text-sm">
+          <li class="flex items-center gap-2">📞 +52 (55) 1234-5678</li>
+          <li class="flex items-center gap-2">📧 contacto@friolisto.com</li>
+          <li class="flex items-center gap-2">🕐 Lun-Vie 9:00 - 18:00</li>
+        </ul>
+      </div>
+      <!-- Legal -->
+      <div>
+        <h4 class="font-bold text-lg mb-4 text-brand-orange">Legal</h4>
+        <ul class="space-y-3">
+          <li><a href="#" id="privacyBtn" class="footer-link text-white/50 text-sm">Políticas de Privacidad</a></li>
+          <li><a href="#" class="footer-link text-white/50 text-sm">Términos y Condiciones</a></li>
+          <li><a href="#" class="footer-link text-white/50 text-sm">Aviso Legal</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-white/10 pt-8 text-center">
+      <p class="text-white/40 text-sm">© 2026 Frío Listo. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- PRIVACY MODAL -->
+<div id="privacyModal" class="modal-overlay">
+  <div class="modal-content">
+    <div class="flex justify-between items-center mb-6">
+      <h3 class="text-2xl font-bold gradient-text">Políticas de Privacidad</h3>
+      <button id="closeModal" class="text-white/60 hover:text-white text-2xl">✕</button>
+    </div>
+    <div class="text-white/70 text-sm space-y-4 leading-relaxed">
+      <p><strong class="text-white">1. Responsable del tratamiento de datos:</strong> Frío Listo S.A. de C.V., con domicilio en Av. Ejemplo #123, CDMX.</p>
+      <p><strong class="text-white">2. Datos personales recabados:</strong> Nombre, correo electrónico, teléfono y dirección cuando aplique.</p>
+      <p><strong class="text-white">3. Finalidad:</strong> Los datos se utilizan para contacto comercial, envío de promociones y mejora de nuestros servicios.</p>
+      <p><strong class="text-white">4. Protección de datos:</strong> Implementamos medidas de seguridad administrativas, técnicas y físicas para proteger sus datos.</p>
+      <p><strong class="text-white">5. Derechos ARCO:</strong> Usted tiene derecho a acceder, rectificar, cancelar u oponerse al tratamiento de sus datos personales enviando solicitud a: privacidad@friolisto.com</p>
+      <p><strong class="text-white">6. Cambios al aviso:</strong> Nos reservamos el derecho de modificar este aviso. Las actualizaciones se publicarán en nuestro sitio web.</p>
+      <p class="text-white/40 text-xs mt-6">Última actualización: Mayo 2026</p>
+    </div>
+  </div>
+</div>
+
+<!-- SCROLL TOP -->
+<button id="scrollTopBtn" class="scroll-top-btn" aria-label="Ir arriba">↑</button>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

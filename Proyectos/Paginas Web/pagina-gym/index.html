@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IRONFORGE | Equipamiento de Élite</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400;500&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <div class="search-overlay" id="searchOverlay">
+    <div class="search-box">
+      <button class="search-close" onclick="toggleSearch()">ESC — CERRAR</button>
+      <input class="search-input" placeholder="BUSCA EQUIPO..." id="searchInput" />
+    </div>
+  </div>
+
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3>CARRITO</h3>
+      <button class="cart-close" onclick="toggleCart()">✕</button>
+    </div>
+    <div class="cart-empty">
+      <div class="cart-empty-icon">🛒</div>
+      <p>TU CARRITO ESTÁ VACÍO</p>
+    </div>
+  </div>
+  <div class="menu-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+
+  <nav>
+    <a href="index.html" class="logo">IRON<span>FORGE</span></a>
+    <div class="nav-actions">
+      <button class="nav-btn" onclick="toggleSearch()" title="Buscar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+      </button>
+      <button class="nav-btn" onclick="toggleCart()" title="Carrito">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <path d="M16 10a4 4 0 0 1-8 0" />
+        </svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+      <!-- AUTH BUTTON -->
+      <button class="nav-btn" id="authNavBtn" onclick="handleAuthNavClick()" title="Mi Cuenta">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+        <span class="auth-user-dot" id="authUserDot" style="display:none"></span>
+      </button>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <ul class="menu-list">
+      <li class="menu-item" id="menuElectricos">
+        <a href="#" class="menu-link" onclick="toggleSubmenu('submenuElectricos', 'menuElectricos', event)">
+          Aparatos Eléctricos
+          <span class="arrow">▼</span>
+        </a>
+        <ul class="submenu" id="submenuElectricos">
+          <li><a
+              href="caminadoras.html">Caminadoras</a>
+          </li>
+          <li><a
+              href="bicicletas.html">Bicicletas</a>
+          </li>
+          <li><a
+              href="remos.html">Remos</a>
+          </li>
+        </ul>
+      </li>
+      <li class="menu-item" id="menuPesas">
+        <a href="#" class="menu-link" onclick="toggleSubmenu('submenuPesas', 'menuPesas', event)">
+          Pesas
+          <span class="arrow">▼</span>
+        </a>
+        <ul class="submenu" id="submenuPesas">
+          <li><a
+              href="mancuernas.html">Mancuernas</a>
+          </li>
+          <li><a
+              href="peso_muerto.html">Peso
+              Muerto</a></li>
+        </ul>
+      </li>
+      <li class="menu-item">
+        <a href="cardio.html"
+          class="menu-link">Cardio</a>
+      </li>
+    </ul>
+  </div>
+  <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid-bg"></div>
+    <div class="hero-noise"></div>
+
+    <svg class="hero-dumbbell-svg" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="170" y="85" width="60" height="30" rx="4" fill="#e8ff00" />
+      <rect x="100" y="55" width="30" height="90" rx="8" fill="#e8ff00" />
+      <rect x="70" y="45" width="35" height="110" rx="6" fill="#e8ff00" />
+      <rect x="45" y="60" width="28" height="80" rx="5" fill="#e8ff00" />
+      <rect x="270" y="55" width="30" height="90" rx="8" fill="#e8ff00" />
+      <rect x="295" y="45" width="35" height="110" rx="6" fill="#e8ff00" />
+      <rect x="327" y="60" width="28" height="80" rx="5" fill="#e8ff00" />
+    </svg>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">Nueva Temporada 2025</div>
+      <h1 class="hero-title">
+        FORJA TU<br>
+        <span class="line2">PODER</span><br>
+        <span class="outline">SIN LÍMITES</span>
+      </h1>
+      <p class="hero-sub">Equipamiento de alto rendimiento para atletas serios. Desde caminadoras profesionales hasta
+        pesas de precisión.</p>
+      <div class="hero-cta">
+        <a href="#productos" class="btn-primary">Ver Catálogo →</a>
+        
+        <a href="cardio.html" class="btn-ghost">Zona Cardio</a>
+
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">+500</div>
+        <div class="stat-label">Productos</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">12K</div>
+        <div class="stat-label">Clientes</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">8</div>
+        <div class="stat-label">Años</div>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <div class="scroll-text">Scroll</div>
+    </div>
+  </section>
+
+  <div class="marquee-wrap">
+    <div class="marquee">
+      <span class="marquee-item">Caminadoras Pro <span class="marquee-sep">✦</span></span>
+      <span class="marquee-item">Bicicletas Elípticas <span class="marquee-sep">✦</span></span>
+      <span class="marquee-item">Mancuernas Ajustables <span class="marquee-sep">✦</span></span>
+      <span class="marquee-item">Remos Magnéticos <span class="marquee-sep">✦</span></span>
+      <span class="marquee-item">Pesas Olímpicas <span class="marquee-sep">✦</span></span>
+      <span class="marquee-item">Cardio de Élite <span class="marquee-sep">✦</span></span>
+      <span class="marquee-item">Envío Gratis +$2,000 <span class="marquee-sep">✦</span></span>
+      <span class="marquee-item">Caminadoras Pro <span class="marquee-sep">✦</span></span>
+      <span class="marquee-item">Bicicletas Elípticas <span class="marquee-sep">✦</span></span>
+      <span class="marquee-item">Mancuernas Ajustables <span class="marquee-sep">✦</span></span>
+      <span class="marquee-item">Remos Magnéticos <span class="marquee-sep">✦</span></span>
+      <span class="marquee-item">Pesas Olímpicas <span class="marquee-sep">✦</span></span>
+      <span class="marquee-item">Cardio de Élite <span class="marquee-sep">✦</span></span>
+      <span class="marquee-item">Envío Gratis +$2,000 <span class="marquee-sep">✦</span></span>
+    </div>
+  </div>
+
+  <section class="section" id="productos">
+    <div class="section-header reveal">
+      <div>
+        <div class="section-tag">Catálogo</div>
+        <h2 class="section-title">PESAS &amp;<br>EQUIPAMIENTO</h2>
+      </div>
+      <a href="mancuernas.html" class="btn-ghost" style="align-self:center">Ver Todo →</a>
+    </div>
+    <!-- Producto 1 -->
+    <div class="products-grid">
+      <div class="product-card reveal">
+        <div class="product-img-wrap">
+          <img class="item-img" src="https://aparatosparagimnasios.com/wp-content/uploads/2025/06/Set-1-scaled.jpg"
+            alt="">
+          <div class="product-overlay"></div>
+          <span class="product-badge new">Nuevo</span>
+          <button class="product-quick-add" onclick="addToCart('Set Mancuerna Iron 5-50lb')">+ AGREGAR</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Mancuernas</div>
+          <div class="product-name">SET MANCUERNAS IRON 5-50LB</div>
+          <div class="product-footer">
+            <div class="product-price">
+              <span class="old-price">$43,699</span>
+              <span class="currency">$</span>32,000
+            </div>
+            <button class="add-cart-btn" onclick="addToCart('Set Mancuerna Iron 5-50lb')">+</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Producto 2 -->
+        <div class="product-card reveal">
+        <div class="product-img-wrap">
+          <img class="item-img" src="https://cdn.etenonfitness.com/assets/products/PL25514/PL25.514%20-%20Etenon%20Dual%20Remo-Peso%20Muerto%20vista%202-large.jpg?v=1" alt="">
+          <div class="product-overlay"></div>
+          <span class="product-badge new">Nuevo</span>
+          <button class="product-quick-add" onclick="addToCart('Dual Remo Peso Muerto')">+ AGREGAR</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Peso Muerto</div>
+          <div class="product-name">Dual Remo Peso Muerto</div>
+          <div class="product-footer">
+            <div class="product-price">
+              <span class="old-price">$19,599</span>
+              <span class="currency">$</span>15,999
+            </div>
+            <button class="add-cart-btn" onclick="addToCart('Dual Remo Peso Muerto')">+</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Producto 3 -->
+      <div class="product-card reveal">
+        <div class="product-img-wrap">
+          <img class="item-img" src="https://aparatosparagimnasios.com/wp-content/uploads/2024/05/imgst583.png" alt="">
+          <div class="product-overlay"></div>
+          <span class="product-badge new">Nuevo</span>
+          <button class="product-quick-add" onclick="addToCart('Remo inclinado Maquina para Espalda')">+
+            AGREGAR</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Remos</div>
+          <div class="product-name">REMO INCLINADO MAQUINA PARA ESPALDA</div>
+          <div class="product-footer">
+            <div class="product-price">
+              <span class="old-price">$15,599</span>
+              <span class="currency">$</span>12,500
+            </div>
+            <button class="add-cart-btn" onclick="addToCart('Remo inclinado Maquina para Espalda')">+</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Producto 4 -->
+      <div class="product-card reveal">
+        <div class="product-img-wrap" style="background:#111;">
+          <img class="item-img"
+            src="https://aparatosparagimnasios.com/wp-content/uploads/2025/09/Mancuernas-5-50lbs.png" alt="">
+          <div class="product-overlay"></div>
+          <span class="product-badge new">Hot</span>
+          <button class="product-quick-add" onclick="addToCart('Set de Mancuernas 5-50LBS + Rack')">+ AGREGAR</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Mancuernas</div>
+          <div class="product-name">Set de Mancuernas 5-50LBS + Rack</div>
+          <div class="product-footer">
+            <div class="product-price">
+              <span class="old-price">$22,999</span>
+              <span class="currency">$</span>17,550
+            </div>
+            <button class="add-cart-btn" onclick="addToCart('Set de Mancuernas 5-50LBS + Rack')">+</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Producto 5 -->
+      <div class="product-card reveal">
+        <div class="product-img-wrap">
+          <img class="item-img"
+            src="https://aparatosparagimnasios.com/wp-content/uploads/2024/10/caminadora-gris-1-1080x1080.jpg" alt="">
+          <div class="product-overlay"></div>
+          <span class="product-badge">Oferta</span>
+          <button class="product-quick-add" onclick="addToCart('Caminadora Profesional x8900')">+ AGREGAR</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">CAMINADORA</div>
+          <div class="product-name">CAMINADORA PROFESIONAL X8900</div>
+          <div class="product-footer">
+            <div class="product-price">
+              <span class="currency">$</span>46,400
+            </div>
+            <button class="add-cart-btn" onclick="addToCart('Caminadora Profesional x8900')">+</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Producto 6 -->
+      <div class="product-card reveal">
+        <div class="product-img-wrap">
+          <img class="item-img"
+            src="https://aparatosparagimnasios.com/wp-content/uploads/2025/06/SP99-BICICLETA-SPINNING.jpg" alt="">
+          <div class="product-overlay"></div>
+          <button class="product-quick-add" onclick="addToCart('SP99 Bicicleta Spinningg')">+ AGREGAR</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Bicicletas</div>
+          <div class="product-name">SP99 BICICLETA SPINNING</div>
+          <div class="product-footer">
+            <div class="product-price">
+              <span class="currency">$</span>12,100
+            </div>
+            <button class="add-cart-btn" onclick="addToCart('SP99 Bicicleta Spinningg')">+</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Producto 7 -->
+      <div class="product-card reveal">
+        <div class="product-img-wrap">
+          <img class="item-img" src="https://cdn.etenonfitness.com/assets/products/PL2528/PL2528%20-%20Etenon%20Multi%20Remo%20Bajo%20y%20Peso%20Muerto-large.jpg?v=1" alt="">
+          <div class="product-overlay"></div>
+          <button class="product-quick-add" onclick="addToCart('Multi Remo Bajo y Peso Muerto MP')">+ AGREGAR</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Peso Muerto</div>
+          <div class="product-name">Multi Remo Bajo y Peso Muerto MP</div>
+          <div class="product-footer">
+            <div class="product-price">
+              <span class="currency">$</span>23,799
+            </div>
+            <button class="add-cart-btn" onclick="addToCart('Multi Remo Bajo y Peso Muerto MP')">+</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Producto 8 -->
+      <div class="product-card reveal">
+        <div class="product-img-wrap">
+          <img class="item-img"
+            src="https://aparatosparagimnasios.com/wp-content/uploads/2026/03/img98746-scaled-1.webp" alt="">
+          <div class="product-overlay"></div>
+          <span class="product-badge">Oferta</span>
+          <button class="product-quick-add" onclick="addToCart('Aparato de remo con Barra T - Línea LV')">+
+            AGREGAR</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Remos</div>
+          <div class="product-name">APARATO DE REMO CON BARRA T - LÍNEA LV</div>
+          <div class="product-footer">
+            <div class="product-price">
+              <span class="currency">$</span>17,600
+            </div>
+            <button class="add-cart-btn" onclick="addToCart('Aparato de remo con Barra T - Línea LV')">+</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Producto 9 -->
+      <div class="product-card reveal">
+        <div class="product-img-wrap">
+          <img class="item-img" src="https://aparatosparagimnasios.com/wp-content/uploads/2024/10/caminadorax8900.jpg"
+            alt="">
+          <div class="product-overlay"></div>
+          <button class="product-quick-add" onclick="addToCart('Caminadora Treadmill X860 uso rudo')">+ AGREGAR</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">CAMINADORA</div>
+          <div class="product-name">Caminadora Treadmill X860 uso rudo</div>
+          <div class="product-footer">
+            <div class="product-price">
+              <span class="currency">$</span>31,100
+            </div>
+            <button class="add-cart-btn" onclick="addToCart('Caminadora Treadmill X860 uso rudo')">+</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    </div>
+  </section>
+
+  <div class="feature-band reveal">
+    <div class="feature-item">
+      <div class="feature-icon">🚚</div>
+      <div class="feature-text">
+        <h4>Envío Gratis</h4>
+        <p>En compras mayores a $2,000 MXN a toda la república</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🛡</div>
+      <div class="feature-text">
+        <h4>Garantía 2 Años</h4>
+        <p>Todos nuestros productos tienen garantía de fábrica</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">↩</div>
+      <div class="feature-text">
+        <h4>30 Días Devolución</h4>
+        <p>Si no estás satisfecho, te devolvemos tu dinero</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">💳</div>
+      <div class="feature-text">
+        <h4>Meses sin Intereses</h4>
+        <p>Hasta 18 MSI con tarjetas participantes</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="newsletter reveal">
+    <h2 class="newsletter-title">ÚNETE AL <span style="color:var(--accent)">FORGE</span></h2>
+    <p class="newsletter-sub">Recibe ofertas exclusivas, guías de entrenamiento y acceso anticipado a nuevos productos.
+    </p>
+    <div class="newsletter-form">
+      <input class="newsletter-input" type="email" placeholder="tu@correo.com" />
+      <button class="newsletter-submit">Suscribirse</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">IRON<span>FORGE</span></a>
+        <p>Equipamiento de gimnasio de élite para quienes buscan superar sus límites. Calidad profesional para uso
+          diario.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Categorías</h5>
+        <ul>
+          <li><a
+              href="caminadoras.html">Caminadoras</a>
+          </li>
+          <li><a
+              href="bicicletas.html">Bicicletas</a>
+          </li>
+          <li><a
+              href="remos.html">Remos</a>
+          </li>
+          <li><a
+              href="mancuernas.html">Mancuernas</a>
+          </li>
+          <li><a
+              href="peso_muerto.html">Peso
+              Muerto</a></li>
+          <li><a
+              href="cardio.html">Cardio</a>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h5>Contacto</h5>
+        <ul>
+          <li><a href="#">ventas@ironforge.mx</a></li>
+          <li><a href="#">800-IRON-FRG</a></li>
+          <li><a href="#">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 <span>IRONFORGE</span> — Todos los derechos reservados</p>
+      <p class="footer-copy">Hecho con 💪 en México</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- ================================================
+       AUTH MODAL — Login / Registro
+       ================================================ -->
+  <div class="auth-overlay" id="authOverlay" onclick="handleAuthOverlayClick(event)">
+    <div class="auth-modal" id="authModal">
+
+      <button class="auth-close" onclick="closeAuthModal()">✕</button>
+
+      <!-- Tabs -->
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')">INICIAR SESIÓN</button>
+        <button class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')">CREAR CUENTA</button>
+      </div>
+
+      <!-- LOGIN -->
+      <div class="auth-pane" id="paneLogin">
+        <p class="auth-sub">Accede a tu cuenta para realizar pedidos.</p>
+        <div class="auth-field">
+          <label>Correo Electrónico</label>
+          <input type="email" id="loginEmail" placeholder="tu@correo.com" autocomplete="email">
+        </div>
+        <div class="auth-field">
+          <label>Contraseña</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password">
+        </div>
+        <div class="auth-msg" id="loginMsg"></div>
+        <button class="auth-submit" id="loginSubmit" onclick="submitLogin()">ENTRAR →</button>
+        <p class="auth-switch">¿No tienes cuenta? <button onclick="switchAuthTab('register')">Crear una aquí</button></p>
+      </div>
+
+      <!-- REGISTER -->
+      <div class="auth-pane" id="paneRegister" style="display:none">
+        <p class="auth-sub">Crea tu cuenta para hacer pedidos en IRONFORGE.</p>
+        <div class="auth-field">
+          <label>Nombre Completo</label>
+          <input type="text" id="regNombre" placeholder="Tu nombre" autocomplete="name">
+        </div>
+        <div class="auth-field">
+          <label>Correo Electrónico</label>
+          <input type="email" id="regEmail" placeholder="tu@correo.com" autocomplete="email">
+        </div>
+        <div class="auth-field">
+          <label>Contraseña <span style="color:var(--gray);font-size:.75rem">(mín. 6 caracteres)</span></label>
+          <input type="password" id="regPassword" placeholder="••••••••" autocomplete="new-password">
+        </div>
+        <div class="auth-msg" id="registerMsg"></div>
+        <button class="auth-submit" id="registerSubmit" onclick="submitRegister()">CREAR CUENTA →</button>
+        <p class="auth-switch">¿Ya tienes cuenta? <button onclick="switchAuthTab('login')">Iniciar sesión</button></p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- USER POPOVER -->
+  <div class="user-popover" id="userPopover">
+    <div class="user-popover-name" id="userPopoverName"></div>
+    <div class="user-popover-email" id="userPopoverEmail"></div>
+    <button class="user-popover-btn" onclick="doLogout()">Cerrar Sesión</button>
+  </div>
+
+  <!-- ORDER SUCCESS MODAL -->
+  <div class="auth-overlay" id="orderSuccessOverlay" onclick="closeOrderSuccess()" style="display:none">
+    <div class="auth-modal" style="text-align:center;padding:3rem 2.5rem;max-width:440px">
+      <div style="font-size:3rem;margin-bottom:1rem">✅</div>
+      <div style="font-family:var(--font-display);font-size:2rem;letter-spacing:2px;color:var(--accent);margin-bottom:.5rem">¡PEDIDO REALIZADO!</div>
+      <p style="color:var(--gray);font-size:.9rem;margin-bottom:2rem" id="orderSuccessMsg">Tu pedido fue registrado. Te contactaremos pronto.</p>
+      <button class="auth-submit" onclick="closeOrderSuccess()">CONTINUAR COMPRANDO</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

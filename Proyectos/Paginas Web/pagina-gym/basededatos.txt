@@ -1,0 +1,39 @@
+Configuración de Base de Datos en XAMPP
+Este plan detalla cómo crear la base de datos ironforge_db e importar el esquema desde 
+database.sql
+ para que el proyecto pagina-gym funcione correctamente.
+
+Pasos Propuestos
+1. Iniciar XAMPP
+Asegúrate de que los módulos Apache y MySQL estén en verde en el Panel de Control de XAMPP.
+
+2. Acceder a phpMyAdmin
+Abre tu navegador y ve a http://localhost/phpmyadmin.
+O haz clic en el botón Admin del módulo MySQL en XAMPP.
+3. Crear e Importar Base de Datos
+En phpMyAdmin, haz clic en la pestaña Importar (en la barra superior).
+Haz clic en Seleccionar archivo y busca el archivo 
+database.sql
+.
+Desliza hasta el final y haz clic en Importar.
+Nota: El script SQL ya incluye la instrucción CREATE DATABASE IF NOT EXISTS ironforge_db, por lo que creará la base de datos y las tablas automáticamente.
+4. Verificar Configuración de Conexión
+El archivo 
+api/config.php
+ ya está configurado con los valores por defecto de XAMPP:
+
+Host: localhost
+DB Name: ironforge_db
+User: root
+Password: "" (vacío)
+IMPORTANT
+
+Si en el futuro pones una contraseña a tu usuario root de MySQL, deberás actualizar la línea 9 de 
+api/config.php
+.
+
+Verificación
+Para confirmar que todo funciona:
+
+Intenta registrar un usuario desde la web.
+Si no hay errores y los datos aparecen en la tabla usuarios en phpMyAdmin, la conexión es exitosa.
