@@ -21,7 +21,6 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16 sm:h-20 transition-all duration-300"
                 id="header-container">
-                <!-- Logo -->
                 <a href="#" class="flex items-center gap-2 group">
                     <span class="text-xl sm:text-2xl font-bold text-slate-300">
                         César Antonio Castro Sotelo
@@ -32,7 +31,6 @@
                     </span>
                 </a>
 
-                <!-- Desktop Nav Links -->
                 <nav class="hidden lg:flex items-center gap-1">
                     <a href="#sobre-mi"
                         class="nav-link relative px-3.5 py-2 text-sm font-medium text-slate-300 hover:text-white rounded-lg hover:bg-slate-800/40 transition duration-300"
@@ -61,7 +59,6 @@
                     </a>
                 </nav>
 
-                <!-- CTA Button -->
                 <div class="hidden sm:flex items-center gap-4">
                     <a href="mailto:cesarantcasot0212@gmail.com"
                         class="inline-flex items-center justify-center px-4 py-2 text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 rounded-lg shadow-md hover:shadow-indigo-500/20 hover:scale-[1.02] active:scale-95 transition-all duration-300">
@@ -69,7 +66,6 @@
                     </a>
                 </div>
 
-                <!-- Hamburger Button (Mobile) -->
                 <button id="hamburger"
                     class="lg:hidden flex flex-col items-center justify-center w-10 h-10 rounded-lg hover:bg-slate-800/50 focus:outline-none transition-colors duration-200"
                     aria-label="Menú">
@@ -86,15 +82,12 @@
         </div>
     </header>
 
-    <!-- Backdrop Overlay for Mobile Menu -->
     <div id="menu-backdrop"
         class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-40 opacity-0 pointer-events-none transition-opacity duration-300">
     </div>
 
-    <!-- Mobile Drawer Menu -->
     <aside id="mobile-menu"
         class="fixed top-0 right-0 w-80 max-w-[85vw] h-full bg-slate-900/95 backdrop-blur-xl border-l border-slate-800/50 z-50 transform translate-x-full transition-transform duration-300 ease-in-out shadow-2xl flex flex-col justify-between">
-        <!-- Drawer Header -->
         <div class="p-6 border-b border-slate-800/50 flex items-center justify-between">
             <span class="font-extrabold text-lg text-white">Navegación</span>
             <button id="close-menu"
@@ -107,7 +100,6 @@
             </button>
         </div>
 
-        <!-- Drawer Links -->
         <nav class="flex-1 px-6 py-8 flex flex-col gap-4 overflow-y-auto">
             <a href="#sobre-mi"
                 class="mobile-nav-link flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/50 transition-colors duration-200"
@@ -141,7 +133,6 @@
             </a>
         </nav>
 
-        <!-- Drawer Footer -->
         <div class="p-6 border-t border-slate-800/50 flex flex-col gap-4">
             <a href="mailto:cesarantcasot0212@gmail.com"
                 class="w-full inline-flex items-center justify-center px-4 py-3 text-sm font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 rounded-xl transition-all duration-300 text-center shadow-lg shadow-blue-500/10">
@@ -173,12 +164,30 @@
     <section id="mapas-interactivos" class="scroll-mt-24">
         <h2 class="text-4xl font-bold">Proyectos Mapas Interactivos</h2>
 
+        <div>
+            <p class="text-justify pb-4 pl-6 pr-6">
+                Con el objetivo de facilitar la orientación dentro de las instalaciones de la
+                Benemérita Universidad Autónoma de Puebla (BUAP), desarrollé una serie de
+                mapas interactivos que permiten a estudiantes, docentes y visitantes localizar
+                fácilmente edificios, servicios y espacios de interés dentro de los distintos
+                campus. Esta solución surge ante la problemática de que muchas personas,
+                especialmente quienes ingresan por primera vez a la universidad,
+                suelen tener dificultades para ubicarse y llegar a su destino.
+
+                <br><br> El proyecto fue desarrollado utilizando HTML, CSS, Tailwind CSS, JavaScript y GeoJSON,
+                tecnologías que permitieron crear una experiencia visual, dinámica e intuitiva.
+                Durante el proceso de desarrollo, me apoyé en herramientas de Inteligencia Artificial
+                para la investigación, resolución de problemas técnicos, optimización de código
+                y generación de ideas, lo que contribuyó a agilizar la construcción del proyecto.
+                Los mapas no solo muestran la ubicación de cada instalación, sino que también
+                despliegan información relevante sobre ellas, facilitando la navegación y el
+                acceso a los distintos espacios universitarios de manera rápida y eficiente.
+            </p>
+        </div>
+
         <div class="flex justify-center">
-
             <div class="proyecto">
-
                 <h3 class="text-center text-xl font-bold mb-2">Mapa de Complejos Regionales</h3>
-
                 <img class="h-48 w-96 rounded-md" src="imgs/Mapas/Mapa Complejos Regionales/Evidencia.PNG">
 
                 <a class="flex justify-center p-4" href="Proyectos/Mapas/mapa-complejos-regionales/index.html">
@@ -187,16 +196,12 @@
                         Abrir mapa
                     </button>
                 </a>
-
             </div>
-
         </div>
 
         <div class="flex justify-center">
-
             <div>
                 <h3 class="text-center text-xl font-bold mb-2">Mapa Ciudad Universitaria</h3>
-
                 <img class="h-48 w-96 rounded-md" src="imgs/Mapas/Mapa Ciudad Universitaria/Evidencia.PNG" alt="">
 
                 <a class="flex justify-center p-4" href="Proyectos/Mapas/mapa/index.html">
