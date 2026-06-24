@@ -140,4 +140,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
     sections.forEach(section => observer.observe(section));
+
+    // ────────── Smooth Scroll Navigation ──────────
+    const smoothScrollTo = (targetId) => {
+        const target = document.getElementById(targetId);
+        if (!target) return;
+
+        // Get the current header height to offset scroll position
+        const headerHeight = header ? header.getBoundingClientRect().height : 0;
+        const targetTop = target.getBoundingClientRect().top + window.scrollY - headerHeight - 8;
+
+        window.scrollTo({
+            top: targetTop,
+            behavior: 'smooth'
+        });
+    };
+
+    // Intercept all anchor links that point to page sections
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', (e) => {
+            const href = anchor.getAttribute('href');
+            // Skip empty or lone "#" links (e.g. logo)
+            if (!href || href === '#') return;
+
+            const targetId = href.slice(1); // Remove leading "#"
+            const target = document.getElementById(targetId);
+            if (!target) return;
+
+            e.preventDefault();
+            smoothScrollTo(targetId);
+
+            // Close mobile menu if open when a link is clicked
+            if (!mobileMenu.classList.contains('translate-x-full')) {
+                closeMobileMenu();
+            }
+        });
+    });
 });
