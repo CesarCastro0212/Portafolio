@@ -34,7 +34,7 @@ const proyectos = {
             "imgs/Mantenimiento/E4/1.jpeg",
             "imgs/Mantenimiento/E4/2.jpeg",
             "imgs/Mantenimiento/E4/3.jpeg",
-            "imgs/Mantenimiento/E4/4.jpeg",
+            "imgs/Mantenimiento/E4/4.jpeg"
         ]
     }
 }
